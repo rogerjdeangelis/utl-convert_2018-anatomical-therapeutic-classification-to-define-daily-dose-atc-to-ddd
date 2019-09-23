@@ -1,2 +1,175 @@
 # utl-convert_2018-anatomical-therapeutic-classification-to-define-daily-dose-atc-to-ddd
 Convert 2018 anatomical therapeutic classification to define daily dose atc to ddd 
+
+    Convert 2018 anatomical therapeutic classification to define daily dose atc to ddd                                                               
+                                                                                                                                                     
+       There are two inputs                                                                                                                          
+                                                                                                                                                     
+            1. Five 2018 ATC_ATC Codes                                                                                                               
+            2, ATC lookuo table (ATC% to DDD)                                                                                                        
+                                                                                                                                                     
+                                                                                                                                                     
+    github lookup table                                                                                                                              
+    https://tinyurl.com/y3n2muc9                                                                                                                     
+    https://github.com/rogerjdeangelis/utl-convert_2018-anatomical-therapeutic-classification-to-define-daily-dose-atc-to-ddd/upload/master          
+                                                                                                                                                     
+    https://tinyurl.com/yxn7yf8f                                                                                                                     
+    https://github.com/rogerjdeangelis/utl-convert_2018-anatomical-therapeutic-classification-to-define-daily-dose-atc-to-ddd                        
+                                                                                                                                                     
+    https://tinyurl.com/y33glyyo                                                                                                                     
+    https://github.com/rogerjdeangelis/utl_FDa-national-drug-codes-NDC-to-drug-classes-ATC                                                           
+                                                                                                                                                     
+    Related links                                                                                                                                    
+                                                                                                                                                     
+    https://github.com/fabkury                                                                                                                       
+    https://rdrr.io/github/jotsetung/atc/                                                                                                            
+    https://rdrr.io/github/DHLab-CGU/pharm/                                                                                                          
+    https://open.fda.gov/downloads/                                                                                                                  
+    https://datascience-enthusiast.com/R/json_R_python_1.html                                                                                        
+    https://www.nber.org/data/national-drug-code-data-ndc.html                                                                                       
+                                                                                                                                                     
+    *_                   _                                                                                                                           
+    (_)_ __  _ __  _   _| |_                                                                                                                         
+    | | '_ \| '_ \| | | | __|                                                                                                                        
+    | | | | | |_) | |_| | |_                                                                                                                         
+    |_|_| |_| .__/ \__,_|\__|                                                                                                                        
+            |_|                                                                                                                                      
+    ;                                                                                                                                                
+                                                                                                                                                     
+    see                                                                                                                                              
+    https://rdrr.io/github/jotsetung/atc/                                                                                                            
+                                                                                                                                                     
+    Note many ATC_Codes do not have define doses in the WHO. (dose as needed?)                                                                       
+    They shoud be in the table with missing DDD                                                                                                      
+                                                                                                                                                     
+    *____          _                       _                                                                                                         
+    | ___|    __ _| |_ ___    ___ ___   __| | ___  ___                                                                                               
+    |___ \   / _` | __/ __|  / __/ _ \ / _` |/ _ \/ __|                                                                                              
+     ___) | | (_| | || (__  | (_| (_) | (_| |  __/\__ \                                                                                              
+    |____/   \__,_|\__\___|  \___\___/ \__,_|\___||___/                                                                                              
+                                                                                                                                                     
+    ;                                                                                                                                                
+                                                                                                                                                     
+    data have;                                                                                                                                       
+     retain keyHav 0;                                                                                                                                
+     input atc5 $7.;                                                                                                                                 
+     keyHav=_n_;                                                                                                                                     
+    cards4;                                                                                                                                          
+    A10BB06                                                                                                                                          
+    N02AA05                                                                                                                                          
+    B01AC23                                                                                                                                          
+    C02CA03                                                                                                                                          
+    J01MB07                                                                                                                                          
+    ;;;;                                                                                                                                             
+    run;quit;                                                                                                                                        
+                                                                                                                                                     
+     WORK.HAVE total obs=5                                                                                                                           
+                                                                                                                                                     
+      KEY    ATC5                                                                                                                                    
+                                                                                                                                                     
+       1     A10BB06                                                                                                                                 
+       2     N02AA05                                                                                                                                 
+       3     B01AC23                                                                                                                                 
+       4     C02CA03                                                                                                                                 
+       5     J01MB07                                                                                                                                 
+                                                                                                                                                     
+    *_             _                  _        _     _                                                                                               
+    | | ___   ___ | | ___   _ _ __   | |_ __ _| |__ | | ___                                                                                          
+    | |/ _ \ / _ \| |/ / | | | '_ \  | __/ _` | '_ \| |/ _ \                                                                                         
+    | | (_) | (_) |   <| |_| | |_) | | || (_| | |_) | |  __/                                                                                         
+    |_|\___/ \___/|_|\_\\__,_| .__/   \__\__,_|_.__/|_|\___|                                                                                         
+                             |_|                                                                                                                     
+    ;                                                                                                                                                
+                                                                                                                                                     
+    WORK.ATC5DDD total obs=3,609                                                                                                                     
+                                                                                                                                                     
+    KEYATC    ATC_CODE    NAME                              DDD     U     ADM_R         NOTE                                                         
+                                                                                                                                                     
+       1      A01AA01     sodium fluoride                   1.10    mg      O      0.5 mg fluoride                                                   
+       2      A01AA02     sodium monofluorophosphate         .                                                                                       
+       3      A01AA03     olaflur                           1.10    mg      O                                                                        
+       4      A01AA04     stannous fluoride                  .                                                                                       
+       5      A01AA30     combinations                       .                                                                                       
+       6      A01AA51     sodium fluoride, combinations      .                                                                                       
+       7      A01AB02     hydrogen peroxide                60.00    mg      O                                                                        
+     ....                                                                                                                                            
+                                                                                                                                                     
+    #    Variable    Type    Len                                                                                                                     
+                                                                                                                                                     
+    1    KEYATC      Num       8                                                                                                                     
+    2    ATC_CODE    Char      7                                                                                                                     
+    3    NAME        Char     84                                                                                                                     
+    4    DDD         Num       8                                                                                                                     
+    5    U           Char      6                                                                                                                     
+    6    ADM_R       Char     14                                                                                                                     
+    7    NOTE        Char     59                                                                                                                     
+                                                                                                                                                     
+    Sortedby       ATC_CODE DDD U ADM_R                                                                                                              
+    Validated      NO                                                                                                                                
+    Character Set  ANSI                                                                                                                              
+                                                                                                                                                     
+                          # of                                                                                                                       
+              Unique    Unique                                                                                                                       
+    Index     Option    Values    Variables                                                                                                          
+                                                                                                                                                     
+    ATCDDD    YES         3609    ATC_CODE DDD U ADM_R                                                                                               
+    *            _               _                                                                                                                   
+      ___  _   _| |_ _ __  _   _| |_                                                                                                                 
+     / _ \| | | | __| '_ \| | | | __|                                                                                                                
+    | (_) | |_| | |_| |_) | |_| | |_                                                                                                                 
+     \___/ \__,_|\__| .__/ \__,_|\__|                                                                                                                
+                    |_|                                                                                                                              
+    ;                                                                                                                                                
+                                                                                                                                                     
+    1 000 000 000/16;                                                                                                                                
+                                                                                                                                                     
+    WORK.WANT total obs=6                                                                                                                            
+                                                                                                                                                     
+    KEYHAV    KEYATC    ATC_CODE       NAME         DDD     U     ADM_R                                                                              
+                                                                                                                                                     
+       1        370     A10BB06     carbutamide     0.75    g       O                                                                                
+                                                                                                                                                     
+       2       2452     N02AA05     oxycodone      75.00    mg      O    * matches two records                                                       
+       2       2451     N02AA05     oxycodone      30.00    mg      P      in lookup because two routes                                              
+                                                                                                                                                     
+       3        562     B01AC23     cilostazol      0.20    g       O                                                                                
+       4        795     C02CA03     trimazosin      0.30    g       O                                                                                
+       5       1838     J01MB07     flumequine      1.20    g       O                                                                                
+                                                                                                                                                     
+    *                                                                                                                                                
+     _ __  _ __ ___   ___ ___  ___ ___                                                                                                               
+    | '_ \| '__/ _ \ / __/ _ \/ __/ __|                                                                                                              
+    | |_) | | | (_) | (_|  __/\__ \__ \                                                                                                              
+    | .__/|_|  \___/ \___\___||___/___/                                                                                                              
+    |_|                                                                                                                                              
+    ;                                                                                                                                                
+                                                                                                                                                     
+    data have;                                                                                                                                       
+     retain keyHav 0;                                                                                                                                
+     input atc5 $7.;                                                                                                                                 
+     keyHav=_n_;                                                                                                                                     
+    cards4;                                                                                                                                          
+    A10BB06                                                                                                                                          
+    N02AA05                                                                                                                                          
+    B01AC23                                                                                                                                          
+    C02CA03                                                                                                                                          
+    J01MB07                                                                                                                                          
+    ;;;;                                                                                                                                             
+    run;quit;                                                                                                                                        
+                                                                                                                                                     
+    proc sql;                                                                                                                                        
+                                                                                                                                                     
+      create                                                                                                                                         
+         table want as                                                                                                                               
+                                                                                                                                                     
+      select                                                                                                                                         
+         l.keyHav                                                                                                                                    
+        ,r.*                                                                                                                                         
+      from                                                                                                                                           
+         have as l left join atc5ddd as r                                                                                                            
+      on                                                                                                                                             
+         l.atc5 = r.atc_code                                                                                                                         
+      order                                                                                                                                          
+         by keyHav                                                                                                                                   
+    ;quit;                                                                                                                                           
+                                                                                                                                                     
